@@ -5,8 +5,8 @@ import {
   useEffect,
   useState,
 } from "react";
-import { auth, googleProvider } from "../firebase/config";
 import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
+import { auth, googleProvider } from "../firebase/config";
 
 const AuthContext = createContext();
 
@@ -24,7 +24,15 @@ export const AuthProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
-  const login = () => signInWithPopup(auth, googleProvider);
+  const login = () => {
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        console.log("User logged in:", result.user);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   const logout = () => signOut(auth);
 
