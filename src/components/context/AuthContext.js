@@ -6,7 +6,8 @@ import {
   useState,
 } from "react";
 import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
-import { auth, googleProvider } from "../firebase/config";
+import { auth, googleProvider, db } from "../firebase/config";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 
 const AuthContext = createContext();
 
@@ -16,6 +17,23 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const createUserProfile = async (user) => {
+    if (!user) return;
+    const userRef = doc(db, "users", user.uid);
+
+    await setDoc(
+      userRef,
+      {
+        name: user.displayName || "Annoymous",
+        email: user.email,
+        photoURL: user.photoURL || null,
+        createdAt: serverTimestamp(),
+      },
+      {
+        merge: true,
+      }
+    );
+  };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -26,8 +44,9 @@ export const AuthProvider = ({ children }) => {
 
   const login = () => {
     signInWithPopup(auth, googleProvider)
-      .then((result) => {
+      .then(async (result) => {
         console.log("User logged in:", result.user);
+        await createUserProfile(result.user);
       })
       .catch((error) => {
         console.error(error);

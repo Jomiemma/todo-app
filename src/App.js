@@ -5,13 +5,14 @@ import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 
 function App() {
-  const { currentUser } = useAuth();
+  const { currentUser, logout } = useAuth();
 
   return (
     <div className="app">
       {currentUser ? (
         <>
           <h1>{currentUser.displayName}'s Todo List</h1>
+          <button onClick={logout}>Logout</button>
           <TodoForm />
           <TodoList />
         </>

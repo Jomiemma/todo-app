@@ -18,7 +18,6 @@ function TodoForm() {
     });
 
     setTitle("");
-    console.log("Current user in TodoForm:", currentUser);
   };
 
   return (
