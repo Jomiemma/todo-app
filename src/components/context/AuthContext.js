@@ -45,7 +45,6 @@ export const AuthProvider = ({ children }) => {
   const login = () => {
     signInWithPopup(auth, googleProvider)
       .then(async (result) => {
-        console.log("User logged in:", result.user);
         await createUserProfile(result.user);
       })
       .catch((error) => {
