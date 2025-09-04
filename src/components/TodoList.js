@@ -1,75 +1,3 @@
-// import React, { useEffect, useState } from "react";
-// import { db } from "./firebase/config";
-// import { useAuth } from "./context/AuthContext";
-// import {
-//   collection,
-//   onSnapshot,
-//   query,
-//   orderBy,
-//   deleteDoc,
-//   doc,
-//   updateDoc,
-// } from "firebase/firestore";
-// import { toggleTodoDone } from "./utils/toggleTodoDone";
-// import { deleteTodo } from "../utils/deleteTodo";
-// import { updateTodo } from "../utils/updateTodo";
-
-// function TodoList() {
-//   const [todos, setTodos] = useState([]);
-//   const { currentUser } = useAuth();
-
-//   useEffect(() => {
-//     if (!currentUser) return;
-
-//     const q = query(
-//       collection(db, "users", currentUser.uid, "todos"),
-//       orderBy("createdAt", "desc")
-//     );
-
-//     const unsubscribe = onSnapshot(q, (snapshot) => {
-//       const data = snapshot.docs.map((doc) => ({
-//         id: doc.id,
-//         ...doc.data(),
-//       }));
-//       setTodos(data);
-//     });
-
-//     return () => unsubscribe();
-//   }, [currentUser]);
-
-//   console.log(currentUser);
-//   console.log("Current user in TodoList:", currentUser);
-
-//   return (
-//     <ul>
-//       {todos.map((todo) => (
-//         <li
-//           key={todo.id}
-//           style={{ display: "flex", alignItems: "center", gap: "8px" }}
-//         >
-//           <input
-//             type="checkbox"
-//             checked={todo.done}
-//             onChange={() => toggleTodoDone(currentUser.uid, todo.id, todo.done)}
-//           />
-
-//           <span
-//             style={{
-//               textDecoration: todo.done ? "line-through" : "none",
-//               color: todo.done ? "gray" : "black",
-//             }}
-//           >
-//             {todo.title}
-//           </span>
-//         </li>
-//       ))}
-//     </ul>
-//   );
-// }
-
-// export default TodoList;
-
-// src/TodoList.js
 import React, { useEffect, useState } from "react";
 import { db } from "./firebase/config";
 import { useAuth } from "./context/AuthContext";
@@ -78,6 +6,8 @@ import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 import { toggleTodoDone } from "./utils/toggleTodoDone";
 import { deleteTodo } from "./utils/deleteTodo";
 import { updateTodo } from "./utils/updateTodo";
+
+import "../components/styles/global.css";
 
 function TodoList() {
   const [todos, setTodos] = useState([]);
@@ -189,6 +119,7 @@ function TodoList() {
             />
           ) : (
             <span
+              className="title"
               style={{
                 textDecoration: todo.done ? "line-through" : "none",
                 color: todo.done ? "gray" : "black",
@@ -201,32 +132,13 @@ function TodoList() {
 
           {/* edit button */}
           {editingId !== todo.id && (
-            <button
-              onClick={() => startEditing(todo)}
-              style={{
-                marginLeft: 6,
-                padding: "4px 8px",
-                cursor: "pointer",
-                borderRadius: 4,
-              }}
-            >
+            <button className="edit-btn" onClick={() => startEditing(todo)}>
               Edit
             </button>
           )}
 
           {/* delete button */}
-          <button
-            onClick={() => handleDelete(todo.id)}
-            style={{
-              marginLeft: 6,
-              padding: "4px 8px",
-              cursor: "pointer",
-              borderRadius: 4,
-              background: "transparent",
-              color: "crimson",
-              border: "1px solid rgba(220,20,60,0.1)",
-            }}
-          >
+          <button className="delete-btn" onClick={() => handleDelete(todo.id)}>
             Delete
           </button>
         </li>

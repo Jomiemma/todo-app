@@ -3,6 +3,7 @@ import { useAuth } from "./components/context/AuthContext";
 import Auth from "./components/Auth";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
+import "../src/components/styles/global.css";
 
 function App() {
   const { currentUser, logout } = useAuth();
@@ -11,10 +12,15 @@ function App() {
     <div className="app">
       {currentUser ? (
         <>
-          <h1>{currentUser.displayName}'s Todo List</h1>
-          <button onClick={logout}>Logout</button>
+          <div className="header-display">
+            <h1>{currentUser.displayName}'s Todo List</h1>
+            <button className="logout-btn" onClick={logout}>
+              Logout
+            </button>
+          </div>
           <TodoForm />
           <TodoList />
+          {/* // </div> */}
         </>
       ) : (
         <Auth />

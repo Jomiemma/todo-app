@@ -1,0 +1,142 @@
+.app{
+ background-color: #F9FAFB;
+
+}
+
+/* Login Button */
+.auth-container{                
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F9FAFB;
+}
+
+.login-btn{
+    border: none;
+    border-radius: 12px;
+    padding: 12px 23px;
+    color: white;
+    background-color: #3B82F6; 
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.login-btn:hover{
+    transform: scale(1.06);
+    background-color: #2563EB;
+    transform: translateY(-1px);
+}
+
+/* header */
+.header-display {
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+}
+
+.header-display h1{
+    color: #111827;
+}
+
+/* logout button */
+.logout-btn {
+    margin-top: -10px;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 21px;
+    color: white;
+    background-color: #F59E0B; 
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #D97706;
+    transform: translateY(-1px);
+}
+
+/* Input */
+.input-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.input-container input {
+  padding: 10px 14px;
+  border: 2px solid #D1D5DB;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+  color: #111827;
+  background-color: #FFFFFF;
+  transition: all 0.2s ease;
+}
+
+.input-container input::placeholder {
+  color: #6B7280;
+}
+
+.input-container input:focus{
+    border-color: #2563EB; /* blue border */
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3); /* subtle blue glow */
+}
+
+.input-container button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;   /* round only right side */
+  background-color: #2563EB;    /* primary blue */
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.input-container button:hover {
+  background-color: #1D4ED8;    /* darker blue on hover */
+transform: translateY(-1px);
+}
+
+.edit-btn {
+    margin-left: 6px;
+    padding: 4px 8px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #3B82F6;
+    transition: all 0.3s ease;
+}
+
+.edit-btn:hover {
+    background-color: #2563EB;
+    transform: translateY(-1px);
+}
+
+.delete-btn {
+    margin-left: 6px;
+    padding: 4px 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    background: transparent;
+    border: 1px solid rgba(220,20,60,0.1);
+    background-color: #DC2626;
+    transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+    background-color: #B91C1C;
+    transform: translateY(-1px);
+}
+
+.title {
+    text-decoration: none;
+    color: black;
+    flex: 1;
+    font-size: 17px;
+}
+.title.done {
+    text-decoration: line-through;
+    color: gray;
+}

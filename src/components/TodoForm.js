@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { db } from "./firebase/config";
 import { useAuth } from "./context/AuthContext";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import "../components/styles/global.css";
 
 function TodoForm() {
   const [title, setTitle] = useState("");
@@ -21,7 +22,7 @@ function TodoForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="input-container" onSubmit={handleSubmit}>
       <input
         value={title}
         onChange={(e) => setTitle(e.target.value)}

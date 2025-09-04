@@ -1,5 +1,7 @@
 import React from "react";
 import { useAuth } from "./context/AuthContext";
+import "./styles/global.css";
+import { FcGoogle } from "react-icons/fc";
 
 function Auth() {
   const { user, login, logout } = useAuth();
@@ -12,7 +14,9 @@ function Auth() {
           <button onClick={logout}>Logout</button>
         </>
       ) : (
-        <button onClick={login}>Login with Google</button>
+        <button className="login-btn" onClick={login}>
+          <FcGoogle size={35} style={{ marginBottom: "-4px" }} />
+        </button>
       )}
     </div>
   );
