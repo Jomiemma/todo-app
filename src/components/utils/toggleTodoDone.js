@@ -1,5 +1,5 @@
 import { doc, updateDoc } from "firebase/firestore";
-import { db } from "../firebase/config";
+import { db } from "../context/firebase/config";
 
 export const toggleTodoDone = async (userId, todoId, currentValue) => {
   try {

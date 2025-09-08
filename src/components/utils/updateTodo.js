@@ -1,4 +1,4 @@
-import { db } from "../firebase/config";
+import { db } from "../context/firebase/config";
 import { doc, Timestamp, updateDoc } from "firebase/firestore";
 
 export const updateTodo = async (userId, todoId, newTitle) => {
