@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { auth, db } from "../firebase/config";
 import {
   createUserWithEmailAndPassword,
@@ -39,8 +39,6 @@ function AuthForm() {
           userName: user.displayName?.split(" ")[0] || "",
         });
       }
-
-      console.log("Google Auth success:", user);
     } catch (err) {
       console.error("Google Auth error:", err.message);
     } finally {
