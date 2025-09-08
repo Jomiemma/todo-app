@@ -5,10 +5,11 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import PasswordInput from "../reusables/PasswordInput";
 import "../styles/Form.css";
 import { FcGoogle } from "react-icons/fc";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 function AuthForm() {
   const [isSignup, setIsSignup] = useState(false);
@@ -17,6 +18,35 @@ function AuthForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleGoogleAuth = async () => {
+    if (loading) return;
+    setLoading(true);
+
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      const userRef = doc(db, "users", user.uid);
+      const snap = await getDoc(userRef);
+
+      if (!snap.exists()) {
+        await setDoc(userRef, {
+          fullName: user.displayName || "",
+          email: user.email,
+          userName: user.displayName?.split(" ")[0] || "",
+        });
+      }
+
+      console.log("Google Auth success:", user);
+    } catch (err) {
+      console.error("Google Auth error:", err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -88,19 +118,30 @@ function AuthForm() {
         />
 
         {error && <p style={{ color: "red" }}>{error}</p>}
-        {/* <p> */}
-        {/* {isSignup ? "Already have an account?" : "Don’t have an account?"}{" "} */}
-        {/* <button type="button" onClick={() => setIsSignup(!isSignup)}> */}
-        {/* {isSignup ? "Login" : "Sign Up"} */}
-        {/* </button> */}
-        {/* </p> */}
 
         <p>
-          <button type="submit">{isSignup ? "Sign Up" : "Login"}</button>
-          <span >
-            or signup using <FcGoogle />
-          </span>
-          {isSignup ? "Already have an account?" : "Don't have an account?"}{" "}
+          <button className="signup-btn" type="submit">
+            {isSignup ? "Sign Up" : "Login"}
+          </button>
+          <br />
+          <br />
+          <button
+            type="button"
+            onClick={handleGoogleAuth}
+            className="google-btn"
+            disabled={loading}
+          >
+            {loading
+              ? "Connecting..."
+              : isSignup
+              ? "Signup with Google"
+              : "Continue with Google"}
+            <FcGoogle />
+          </button>
+          <br />
+          {isSignup
+            ? "Already have an account?"
+            : "Don't have an account?"}{" "}
           <span className="form-link" onClick={() => setIsSignup(!isSignup)}>
             {isSignup ? "Login" : "Signup"}
           </span>

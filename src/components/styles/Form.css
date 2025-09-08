@@ -30,7 +30,7 @@
   border-color: #4a90e2;
 }
 
-.auth-form button {
+.signup-btn {
   width: 100%;
   padding: 12px;
   margin-top: 1rem;
@@ -43,7 +43,7 @@
   transition: background 0.3s;
 }
 
-.auth-form button:hover {
+.signup-btn:hover {
   background: #357ab8;
 }
 
@@ -62,4 +62,34 @@
 
 .form-link:hover {
     text-decoration: none;
+}
+
+.google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  width: 100%;
+  padding: 10px 16px;
+
+  background-color: #fff;
+  border: 1px solid #dadce0;
+  border-radius: 6px;
+
+  font-size: 14px;
+  font-weight: 500;
+  color: #3c4043;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.google-btn:hover {
+  background-color: #f7f8f8;
+  border-color: #c6c6c6;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.google-btn:active {
+  background-color: #eee;
 }
