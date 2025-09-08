@@ -57,7 +57,7 @@ export default function PasswordInput({
       </div>
 
       {showStrength && (
-        <div style={{ minHeight: "20px" }}>
+        <div style={{ minHeight: "10px" }}>
           {value && (
             <p
               className={`strength ${strength}`}
