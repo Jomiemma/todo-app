@@ -42,7 +42,7 @@
 
 /* logout button */
 .logout-btn {
-    margin-top: -10px;
+    /* margin-top: -7px; */
     border: none;
     border-radius: 8px;
     padding: 12px 21px;
@@ -139,4 +139,43 @@ transform: translateY(-1px);
 .title.done {
     text-decoration: line-through;
     color: gray;
+}
+
+
+.password-input {
+  display: flex;
+  flex-direction: column;
+  gap: 4px; /* little breathing space */
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.input-wrapper input {
+  flex: 1;
+  padding-right: 40px; /* leave space for eye icon */
+}
+
+.toggle-icon {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}
+
+.strength {
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.strength.weak { color: red; }
+.strength.medium { color: orange; }
+.strength.strong { color: green; }
+
+.error-text {
+  font-size: 12px;
+  color: red;
+  margin-top: 2px;
 }
